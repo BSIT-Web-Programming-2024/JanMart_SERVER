@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message Sender</title>
+    <script>
+        async function sendMessage(event) {
+            event.preventDefault(); 
+
+            const message = document.getElementById('message').value;
+
+            const response = await fetch('send_message.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams({
+                    'message': message
+                })
+            });
+
+            const data = await response.json();
+            document.getElementById('response').innerText = data.message;
+        }
+    </script>
+</head>
+<body>
+    <h1>Send a Message</h1>
+    <form onsubmit="sendMessage(event)">
+        <label for="message">Message:</label><br>
+        <input type="text" id="message" name="message" required><br><br>
+        <input type="submit" value="Send">
+    </form>
+    <h2>Response:</h2>
+    <pre id="response"></pre>
+</body>
+</html>
