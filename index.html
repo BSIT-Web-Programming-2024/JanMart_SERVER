@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message from Server</title>
+    <script>
+        async function fetchMessage() {
+            const response = await fetch('/message');
+            const data = await response.json();
+            document.getElementById('message').innerText = data.message;
+        }
+
+        window.onload = fetchMessage;
+    </script>
+</head>
+<body>
+    <h1>Server Message</h1>
+    <p id="message">Loading...</p>
+</body>
+</html>
